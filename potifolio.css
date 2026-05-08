@@ -1,0 +1,222 @@
+/* ---------- GENERAL RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: url("potifolio.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #f2f2f2;
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ---------- DARK OVERLAY ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.75);
+  z-index: -2;
+}
+
+/* ---------- LIGHT PARTICLES (SIMPLIFIED FOR PERFORMANCE) ---------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,187,51,0.12) 1px, transparent 1px);
+  background-size: 90px 90px;
+  animation: floatStars 25s linear infinite;
+  z-index: -1;
+}
+
+@keyframes floatStars {
+  from { background-position: 0 0; }
+  to { background-position: 120px 120px; }
+}
+
+/* ---------- HEADER ---------- */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 50px 20px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 18px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+  flex-wrap: wrap;
+  animation: fadeInDown 1.2s ease-in-out;
+
+  border: 2px solid rgba(255,187,51,0.4);
+}
+
+/* ---------- PROFILE IMAGE ---------- */
+header .photo {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+header .photo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #ffbb33;
+  box-shadow: 0 0 20px rgba(255,187,51,0.5);
+  transition: transform 0.5s ease;
+}
+
+header .photo:hover img {
+  transform: scale(1.05);
+}
+
+/* remove heavy rotating circles → performance upgrade */
+header .photo::before,
+header .photo::after {
+  display: none;
+}
+
+/* ---------- NAME ---------- */
+header h1 {
+  font-size: 2.3rem;
+  animation: glowText 3s infinite alternate;
+}
+
+header h1 span {
+  color: #ffbb33;
+  text-shadow: 0 0 10px #ffbb33;
+}
+
+/* ---------- SECTIONS ---------- */
+section {
+  padding: 50px 8%;
+  margin: 25px auto;
+  background: rgba(0,0,0,0.55);
+  border-radius: 18px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  opacity: 0;
+  transform: translateY(35px);
+  transition: all 0.8s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section:hover {
+  box-shadow: 0 0 25px rgba(255,187,51,0.4);
+}
+
+section h2 {
+  font-size: 1.7rem;
+  color: #ffbb33;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+section h2::after {
+  content: '';
+  width: 50px;
+  height: 3px;
+  background: #ffbb33;
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  border-radius: 2px;
+}
+
+/* ---------- SOCIAL ICONS ---------- */
+.social-icons {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-icons a {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: rgba(255,187,51,0.12);
+  color: #ffbb33;
+
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: #ffbb33;
+  color: #111;
+  transform: scale(1.15);
+}
+
+/* ---------- LINKS ---------- */
+a {
+  color: #ffbb33;
+  text-decoration: none;
+  position: relative;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #ffbb33;
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes glowText {
+  0% { text-shadow: 0 0 8px #ffbb33; }
+  100% { text-shadow: 0 0 18px #ffbb33; }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  section {
+    padding: 35px 5%;
+  }
+
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+  }
+}
